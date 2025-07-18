@@ -1,8 +1,10 @@
 // src/components/ChatBox.jsx
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
+import { Client } from "@stomp/stompjs";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import SockJS from "sockjs-client";
 import { Avatar, AvatarFallback } from "../../components/ui/avatar";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
@@ -12,8 +14,6 @@ import {
   fetchChatMessages,
   sendMessage,
 } from "../../Redux/Chat/Action";
-import SockJS from "sockjs-client";
-import { Client } from "@stomp/stompjs";
 
 let stompClient = null;
 
@@ -29,7 +29,10 @@ const ChatBox = () => {
   // Connect WebSocket
   useEffect(() => {
     if (chat.chat && auth.user) {
-      const socket = new SockJS("http://localhost:5454/ws");
+      const socket = new SockJS(
+        "https://project-tracker-backend-v8y1.onrender.com"
+      );
+      // const socket = new SockJS("http://localhost:5454/ws");
       stompClient = new Client({
         webSocketFactory: () => socket,
         reconnectDelay: 5000,
