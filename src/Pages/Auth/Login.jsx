@@ -97,6 +97,15 @@ const Login = () => {
           <Button type="submit" className="w-full mt-5">
             Login
           </Button>
+
+          <div className="text-right">
+            <a
+              href="/forgot-password"
+              className="text-blue-500 text-sm hover:underline"
+            >
+              Forgot Password?
+            </a>
+          </div>
         </form>
       </Form>
     </div>
